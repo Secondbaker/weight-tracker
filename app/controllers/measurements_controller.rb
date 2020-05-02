@@ -25,9 +25,13 @@ class MeasurementsController < ApplicationController
   # POST /measurements.json
   def create
     @measurement = Measurement.new(measurement_params)
+    puts "firstly - " + @measurement.created_at.to_s
+    @measurement.date_time = @measurement.created_at
 
     respond_to do |format|
       if @measurement.save
+        @measurement.date_time = @measurement.created_at
+        @measurement.save
         format.html { redirect_to @measurement, notice: 'Measurement was successfully created.' }
         format.json { render :show, status: :created, location: @measurement }
       else

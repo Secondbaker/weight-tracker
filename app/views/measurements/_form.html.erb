@@ -16,11 +16,12 @@
     <%= form.text_field :value %>
   </div>
 
+  <% if form.object.date_time %>
   <div class="field">
     <%= form.label :date_time %>
     <%= form.text_field :date_time %>
   </div>
-
+  <% end %>
   <div class="field">
     <%= form.label :notes %>
     <%= form.text_area :notes %>
