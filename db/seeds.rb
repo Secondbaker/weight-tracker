@@ -14,5 +14,5 @@ AVERAGE_WEIGHT_CHANGE_PER_DAY = -1.0 / 7.0
 weight = START_WEIGHT
 time = START_TIME
 100.times do
-    next_measurement = Measurement.create(value: weight, notes: Faker::JapaneseMedia::DragonBall.character)
+    next_measurement = MeasurementData.create(value: weight)
 end

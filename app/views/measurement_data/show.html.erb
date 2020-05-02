@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Value:</strong>
+  <%= @measurement_datum.value %>
+</p>
+
+<p>
+  <strong>Graph time:</strong>
+  <%= @measurement_datum.graph_time %>
+</p>
+
+<%= link_to 'Edit', edit_measurement_datum_path(@measurement_datum) %> |
+<%= link_to 'Back', measurement_data_path %>

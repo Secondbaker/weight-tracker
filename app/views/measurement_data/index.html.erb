@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Measurement Data</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Value</th>
+      <th>Graph time</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @measurement_data.each do |measurement_datum| %>
+      <tr>
+        <td><%= measurement_datum.value %></td>
+        <td><%= measurement_datum.graph_time %></td>
+        <td><%= link_to 'Show', measurement_datum %></td>
+        <td><%= link_to 'Edit', edit_measurement_datum_path(measurement_datum) %></td>
+        <td><%= link_to 'Destroy', measurement_datum, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Measurement Datum', new_measurement_datum_path %>

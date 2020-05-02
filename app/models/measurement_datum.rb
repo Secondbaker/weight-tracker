@@ -1,0 +1,2 @@
+class MeasurementDatum < ApplicationRecord
+end
