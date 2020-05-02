@@ -1,0 +1,27 @@
+<%= form_with(model: data_group, local: true) do |form| %>
+  <% if data_group.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(data_group.errors.count, "error") %> prohibited this data_group from being saved:</h2>
+
+      <ul>
+        <% data_group.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :name %>
+    <%= form.text_field :name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :unit %>
+    <%= form.text_field :unit %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

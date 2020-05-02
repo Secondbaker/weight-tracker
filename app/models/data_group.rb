@@ -1,0 +1,2 @@
+class DataGroup < ApplicationRecord
+end

@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @data_group.name %>
+</p>
+
+<p>
+  <strong>Unit:</strong>
+  <%= @data_group.unit %>
+</p>
+
+<%= link_to 'Edit', edit_data_group_path(@data_group) %> |
+<%= link_to 'Back', data_groups_path %>
