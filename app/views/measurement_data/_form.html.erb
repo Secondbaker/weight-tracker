@@ -16,10 +16,12 @@
     <%= form.text_field :value %>
   </div>
 
-  <div class="field">
-    <%= form.label :graph_time %>
-    <%= form.datetime_select :graph_time %>
-  </div>
+  <% if form.object.graph_time %>
+    <div class="field">
+      <%= form.label :graph_time %>
+      <%= form.datetime_select :graph_time %>
+    </div>
+  <% end %>
 
   <div class="actions">
     <%= form.submit %>
