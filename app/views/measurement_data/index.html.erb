@@ -1,7 +1,7 @@
 <p id="notice"><%= notice %></p>
 
 <h1>Measurement Data</h1>
-
+<%= line_chart @measurement_data.pluck(:graph_time, :value) %>
 <table>
   <thead>
     <tr>

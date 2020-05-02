@@ -15,10 +15,14 @@ MeasurementDatum.destroy_all
 base_weight = START_WEIGHT
 display_weight = base_weight
 time = START_TIME
-100.times do
+datum_counter = 1
+puts "Creating Data"
+until (time - START_TIME)  >= 60 * 60 * 24 * 365 do
+    puts "Datum #" + datum_counter.to_s
     next_measurement = MeasurementDatum.create(value: display_weight, graph_time: time)
     next_time = Faker::Time.between(from: time, to: time + 24.hours)
     base_weight = base_weight + ((next_time - time)*(AVERAGE_WEIGHT_CHANGE_PER_DAY / 24 /60 /60))
     display_weight = base_weight + rand(-4.0..4.0)
     time = next_time
+    datum_counter += 1
 end
