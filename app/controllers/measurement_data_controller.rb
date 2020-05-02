@@ -28,6 +28,8 @@ class MeasurementDataController < ApplicationController
 
     respond_to do |format|
       if @measurement_datum.save
+        @measurement_datum.graph_time = @measurement_datum.created_at
+        @measurement_datum.save
         format.html { redirect_to @measurement_datum, notice: 'Measurement datum was successfully created.' }
         format.json { render :show, status: :created, location: @measurement_datum }
       else

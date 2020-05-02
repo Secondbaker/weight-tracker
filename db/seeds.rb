@@ -10,9 +10,10 @@ START_TIME = Faker::Time.between(from: DateTime.now - 1, to: DateTime.now)
 START_WEIGHT = 180.0
 AVERAGE_WEIGHT_CHANGE_PER_DAY = -1.0 / 7.0
 
+MeasurementDatum.destroy_all
 
 weight = START_WEIGHT
 time = START_TIME
 100.times do
-    next_measurement = MeasurementData.create(value: weight)
+    next_measurement = MeasurementDatum.create(value: weight)
 end
