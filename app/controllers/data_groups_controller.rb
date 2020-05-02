@@ -10,6 +10,7 @@ class DataGroupsController < ApplicationController
   # GET /data_groups/1
   # GET /data_groups/1.json
   def show
+    @measurement_data = MeasurementDatum.where(data_group_id: params[:id])
   end
 
   # GET /data_groups/new

@@ -10,16 +10,26 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_02_201150) do
+ActiveRecord::Schema.define(version: 2020_05_02_213819) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "data_groups", force: :cascade do |t|
+    t.string "name"
+    t.string "unit"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
 
   create_table "measurement_data", force: :cascade do |t|
     t.decimal "value"
     t.datetime "graph_time"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "data_group_id", null: false
+    t.index ["data_group_id"], name: "index_measurement_data_on_data_group_id"
   end
 
+  add_foreign_key "measurement_data", "data_groups"
 end
