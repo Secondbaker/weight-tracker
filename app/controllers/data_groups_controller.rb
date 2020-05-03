@@ -1,6 +1,6 @@
 class DataGroupsController < ApplicationController
   before_action :set_data_group, only: [:show, :edit, :update, :destroy]
-
+  before_action :authenticate_user!
   # GET /data_groups
   # GET /data_groups.json
   def index

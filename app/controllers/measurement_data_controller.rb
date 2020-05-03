@@ -25,7 +25,8 @@ class MeasurementDataController < ApplicationController
   # POST /measurement_data.json
   def create
     @measurement_datum = MeasurementDatum.new(measurement_datum_params)
-
+    before_action :authenticate_user!
+    
     respond_to do |format|
       if @measurement_datum.save
         @measurement_datum.graph_time = @measurement_datum.created_at
