@@ -16,7 +16,7 @@ User.destroy_all
 
 #Creating User 1
 username = Faker::Internet.unique.email
-password = Faker::JapaneseMedia::DragonBall.character
+password = Faker::JapaneseMedia::DragonBall.character + "" + Faker::JapaneseMedia::DragonBall.character
 puts "Creating user " + username
 puts "With password " + password
 first_user = User.new
@@ -43,3 +43,6 @@ until (time - START_TIME)  >= 60 * 60 * 24 * 365 do
     time = next_time
     datum_counter += 1
 end
+
+puts "Completed user " + username
+puts "With password " + password
