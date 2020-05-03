@@ -1,6 +1,7 @@
 class DataGroupsController < ApplicationController
   before_action :set_data_group, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!
+  
   # GET /data_groups
   # GET /data_groups.json
   def index
@@ -11,6 +12,9 @@ class DataGroupsController < ApplicationController
   # GET /data_groups/1
   # GET /data_groups/1.json
   def show
+    if data_group.user_id != current_user.id
+      redirect_to root_path
+    end
     @measurement_data = MeasurementDatum.where(data_group_id: params[:id])
   end
 
@@ -26,7 +30,7 @@ class DataGroupsController < ApplicationController
   # POST /data_groups
   # POST /data_groups.json
   def create
-    @data_group = DataGroup.new(data_group_params)
+    @data_group = current_user.data_groups.new(data_group_params)
 
     respond_to do |format|
       if @data_group.save
