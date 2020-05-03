@@ -18,7 +18,7 @@
 
   <div class="field">
     <%= form.label :unit %>
-    <%= form.text_field :unit %>
+    <%= form.select :unit, options_for_select(Measurement::Unit.names) %>
   </div>
 
   <div class="actions">
