@@ -4,7 +4,8 @@ class DataGroupsController < ApplicationController
   # GET /data_groups
   # GET /data_groups.json
   def index
-    @data_groups = DataGroup.all
+    
+    @data_groups = DataGroup.where(user_id: current_user.id)
   end
 
   # GET /data_groups/1
