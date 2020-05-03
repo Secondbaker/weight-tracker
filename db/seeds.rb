@@ -12,10 +12,22 @@ AVERAGE_WEIGHT_CHANGE_PER_DAY = -1.0 / 7.0
 
 MeasurementDatum.destroy_all
 DataGroup.destroy_all
+User.destroy_all
+
+#Creating User 1
+username = Faker::Internet.unique.email
+password = Faker::JapaneseMedia::DragonBall.character
+puts "Creating user " + username
+puts "With password " + password
+first_user = User.new
+first_user.email = username
+first_user.password = password
+first_user.password_confirmation = password
+first_user.save!
 
 #Creating Weight Data
 puts "Creating Weight Group"
-weight_group = DataGroup.create(name: "Weight", unit: Measurement::Unit[:pounds])
+weight_group = first_user.data_groups.create(name: "Weight", unit: Measurement::Unit[:pounds])
 
 base_weight = START_WEIGHT
 display_weight = base_weight
