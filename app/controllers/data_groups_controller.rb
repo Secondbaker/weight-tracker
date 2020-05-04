@@ -1,19 +1,19 @@
 class DataGroupsController < ApplicationController
   before_action :set_data_group, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!
+  before_action :own_data_group, only: [:show, :edit, :update, :destroy]
   
   # GET /data_groups
   # GET /data_groups.json
   def index
-    
     @data_groups = DataGroup.where(user_id: current_user.id)
   end
 
   # GET /data_groups/1
   # GET /data_groups/1.json
   def show
-    if data_group.user_id != current_user.id
-      redirect_to root_path
+    unless current_user.id == @data_group.user_id
+      redirect_to(root_path, notice: "You cannot access that data group") and return
     end
     @measurement_data = MeasurementDatum.where(data_group_id: params[:id])
   end
@@ -76,5 +76,11 @@ class DataGroupsController < ApplicationController
     # Only allow a list of trusted parameters through.
     def data_group_params
       params.require(:data_group).permit(:name, :unit)
+    end
+
+    def own_data_group
+      unless current_user.id == @data_group.user_id
+        redirect_to(root_path, notice: "You cannot access that data group") and return
+      end
     end
 end
