@@ -1,5 +1,6 @@
 class MeasurementDataController < ApplicationController
   before_action :set_measurement_datum, only: [:show, :edit, :update, :destroy]
+  before_action :own_measurement_datum, only: [:show, :edit, :update, :destroy]
 
   # GET /measurement_data
   # GET /measurement_data.json
@@ -73,5 +74,11 @@ class MeasurementDataController < ApplicationController
     # Only allow a list of trusted parameters through.
     def measurement_datum_params
       params.require(:measurement_datum).permit(:value, :graph_time)
+    end
+
+    def own_measurement_datum
+      unless current_user.id == @measurement_datum.data_group.user_id
+        redirect_to(root_path, notice: "You cannot access that measurement") and return
+      end
     end
 end

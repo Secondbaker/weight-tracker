@@ -2,4 +2,4 @@
 
 <%= render 'form', measurement_datum: @measurement_datum %>
 
-<%= link_to 'Back', measurement_data_path %>
+<%= link_to 'Back', data_group_path(@measurement_datum.data_group) %>
