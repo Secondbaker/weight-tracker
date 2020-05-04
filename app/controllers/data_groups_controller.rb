@@ -67,6 +67,10 @@ class DataGroupsController < ApplicationController
     end
   end
 
+  def input
+    @data_groups = DataGroup.where(user_id: current_user.id)
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_data_group
