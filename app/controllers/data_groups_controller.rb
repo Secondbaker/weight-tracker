@@ -71,6 +71,18 @@ class DataGroupsController < ApplicationController
     @data_groups = DataGroup.where(user_id: current_user.id)
   end
 
+  def save_input
+    respond_to do |format|
+      if @data_group.update(data_group_params)
+        format.html { redirect_to @data_group, notice: 'Data group was successfully updated.' }
+        format.json { render :show, status: :ok, location: @data_group }
+      else
+        format.html { render :edit }
+        format.json { render json: @data_group.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_data_group
@@ -81,6 +93,8 @@ class DataGroupsController < ApplicationController
     def data_group_params
       params.require(:data_group).permit(:name, :unit)
     end
+
+    
 
     def own_data_group
       unless current_user.id == @data_group.user_id

@@ -2,7 +2,15 @@
 
 <%= link_to "Sign Out", destroy_user_session_path(), method: :delete   %> 
 
-<% form_tag data_groups_path %>
-<% @data_groups.each do |data_group| %>
-    <p>here</p>
+<%= form_tag '/save_input' do %>
+    <% @data_groups.each do |data_group| %>
+        <%= fields_for :measurement do |measurement| %>
+            <%= label_tag data_group.name %>
+            <%= measurement.text_field data_group.id %>
+            <%= label_tag data_group.unit %>
+        <% end %>
+    <% end %>
+    <%= submit_tag "Save" %>
 <% end %>
+
+
