@@ -72,13 +72,17 @@ class DataGroupsController < ApplicationController
   end
 
   def save_input
-    respond_to do |format|
-      if @data_group.update(data_group_params)
-        format.html { redirect_to @data_group, notice: 'Data group was successfully updated.' }
-        format.json { render :show, status: :ok, location: @data_group }
-      else
-        format.html { render :edit }
-        format.json { render json: @data_group.errors, status: :unprocessable_entity }
+    puts params.inspect
+    puts params[:measurement]
+    params.each do |param|
+      puts param
+    end
+    params[:measurement].each do |measurement|
+      if DataGroup.find(measurement[0])
+        @data_group = DataGroup.find(measurement[0])
+        if own_data_group
+          @data_group.measurement_data.create(value: measurement[1])
+        end 
       end
     end
   end
@@ -100,5 +104,6 @@ class DataGroupsController < ApplicationController
       unless current_user.id == @data_group.user_id
         redirect_to(root_path, notice: "You cannot access that data group") and return
       end
+      return true
     end
 end
