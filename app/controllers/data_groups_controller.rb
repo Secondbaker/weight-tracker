@@ -15,7 +15,7 @@ class DataGroupsController < ApplicationController
     unless current_user.id == @data_group.user_id
       redirect_to(root_path, notice: "You cannot access that data group") and return
     end
-    @measurement_data = MeasurementDatum.where(data_group_id: params[:id])
+    @measurement_data = MeasurementDatum.where(data_group_id: params[:id]).order(:graph_time)
   end
 
   # GET /data_groups/new
@@ -82,7 +82,8 @@ class DataGroupsController < ApplicationController
         if DataGroup.find(measurement[0])
           @data_group = DataGroup.find(measurement[0])
           if own_data_group
-            @data_group.measurement_data.create(value: measurement[1])
+            measurement_datum = @data_group.measurement_data.create(value: measurement[1])
+            measurement_datum.save
           end 
         end
       end
