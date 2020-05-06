@@ -78,11 +78,13 @@ class DataGroupsController < ApplicationController
       puts param
     end
     params[:measurement].each do |measurement|
-      if DataGroup.find(measurement[0])
-        @data_group = DataGroup.find(measurement[0])
-        if own_data_group
-          @data_group.measurement_data.create(value: measurement[1])
-        end 
+      if measurement[1] != ''
+        if DataGroup.find(measurement[0])
+          @data_group = DataGroup.find(measurement[0])
+          if own_data_group
+            @data_group.measurement_data.create(value: measurement[1])
+          end 
+        end
       end
     end
   end

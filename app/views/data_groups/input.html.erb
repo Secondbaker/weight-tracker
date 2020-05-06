@@ -6,7 +6,7 @@
     <% @data_groups.each do |data_group| %>
         <%= fields_for :measurement do |measurement| %>
             <%= label_tag data_group.name %>
-            <%= measurement.text_field data_group.id %>
+            <%= measurement.number_field data_group.id, step: :any %>
             <%= label_tag data_group.unit %>
         <% end %>
     <% end %>
