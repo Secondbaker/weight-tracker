@@ -10,6 +10,9 @@ START_TIME = Faker::Time.between(from: DateTime.now - 1, to: DateTime.now)
 START_WEIGHT = 180.0
 AVERAGE_WEIGHT_CHANGE_PER_DAY = -1.0 / 7.0
 
+START_WEIGHT_SIZE = 40.0
+AVERAGE_WAIST_SIZE_CHANGE_PER_DAY = -1.0 / 300.0
+
 MeasurementDatum.destroy_all
 DataGroup.destroy_all
 User.destroy_all
@@ -51,6 +54,25 @@ until (time - START_TIME)  >= 60 * 60 * 24 * 365 do
     next_time = Faker::Time.between(from: time, to: time + 24.hours)
     base_weight = base_weight + ((next_time - time)*(AVERAGE_WEIGHT_CHANGE_PER_DAY / 24 /60 /60))
     display_weight = base_weight + rand(-4.0..4.0)
+    time = next_time
+    datum_counter += 1
+end
+
+#Creating Waist Size Data
+puts "Creating Waist Size Group"
+waist_size_group = first_user.data_groups.create(name: "Waist Size", unit: Measurement::Unit[:inches])
+
+base_waist_size = START_WEIGHT_SIZE
+display_waist_size = base_waist_size
+time = START_TIME
+datum_counter = 1
+puts "Creating Data"
+until (time - START_TIME)  >= 60 * 60 * 24 * 365 do
+    puts "Datum #" + datum_counter.to_s
+    next_measurement = waist_size_group.measurement_data.create(value: display_waist_size, graph_time: time)
+    next_time = Faker::Time.between(from: time, to: time + 24.hours)
+    base_waist_size = base_waist_size + ((next_time - time)*(AVERAGE_WAIST_SIZE_CHANGE_PER_DAY / 24 /60 /60))
+    display_waist_size = base_waist_size + rand(-0.5..0.5)
     time = next_time
     datum_counter += 1
 end
