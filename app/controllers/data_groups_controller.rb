@@ -77,17 +77,23 @@ class DataGroupsController < ApplicationController
     params.each do |param|
       puts param
     end
+
+    saved_data = 'test'
+
     params[:measurement].each do |measurement|
       if measurement[1] != ''
         if DataGroup.find(measurement[0])
           @data_group = DataGroup.find(measurement[0])
           if own_data_group
             measurement_datum = @data_group.measurement_data.create(value: measurement[1])
-            measurement_datum.save
+            if measurement_datum.save
+              
+            end
           end 
         end
       end
     end
+    redirect_to input_path, notice: 'Data saved: ' + saved_data
   end
 
   private
