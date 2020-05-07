@@ -46,7 +46,7 @@ class MeasurementDataController < ApplicationController
   def update
     respond_to do |format|
       if @measurement_datum.update(measurement_datum_params)
-        format.html { redirect_to @measurement_datum, notice: 'Measurement datum was successfully updated.' }
+        format.html { redirect_to @measurement_datum.data_group, notice: 'Measurement datum was successfully updated.' }
         format.json { render :show, status: :ok, location: @measurement_datum }
       else
         format.html { render :edit }

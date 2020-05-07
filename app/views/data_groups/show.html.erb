@@ -12,8 +12,8 @@
 </div>
 <% @measurement_data.each do |measurement_datum| %>
   <div class='measurement-datum' id='measurement-datum-<%= measurement_datum.id %>'>
-    <p>value</p>
-    <p>time</p>
+    <p><%= measurement_datum.value %></p>
+    <p><%= measurement_datum.graph_time %></p>
     <%= link_to "Edit", edit_measurement_datum_path(measurement_datum) %>
     <%= link_to "Delete", measurement_datum_path(measurement_datum), method: :delete %>
   </div>
