@@ -3,12 +3,14 @@
 <%= link_to "Sign Out", destroy_user_session_path(), method: :delete   %> 
 
 <%= form_tag '/save_input' do %>
-    <% @data_groups.each do |data_group| %>
-        <%= fields_for :measurement do |measurement| %>
-            <%= label_tag data_group.name %>
-            <%= measurement.number_field data_group.id, step: :any %>
-            <%= label_tag data_group.unit %>
-        <% end %>
+        <% @data_groups.each do |data_group| %>
+        <pre>
+            <%= fields_for :measurement do |measurement| %>
+                <%= label_tag data_group.name %>
+                <%= measurement.number_field data_group.id, step: :any %>
+                <%= label_tag data_group.unit %>
+            <% end %>
+        </pre>
     <% end %>
     <%= submit_tag "Save" %>
 <% end %>
