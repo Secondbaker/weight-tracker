@@ -6,7 +6,8 @@
 
 <% @data_groups.each do |data_group| %>
   <div class='data-group' id='data-group-<%= data_group.id %>'>
-    Is div visible?
+    <%= line_chart data_group.measurement_data.pluck(:graph_time, :value) %>
+    <%= link_to data_group.name, data_group_path(data_group) %>
   </div>
 <% end %>
 
