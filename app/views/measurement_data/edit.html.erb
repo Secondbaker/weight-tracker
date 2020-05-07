@@ -1,6 +1,3 @@
-<h1>Editing Measurement Datum</h1>
-
 <%= render 'form', measurement_datum: @measurement_datum %>
 
-<%= link_to 'Show', @measurement_datum %> |
-<%= link_to 'Back', data_groups_path(@measurement_datum.data_group) %>
+<%= link_to 'Back', data_group_path(@measurement_datum.data_group) %>
