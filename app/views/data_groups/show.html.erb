@@ -10,8 +10,8 @@
 <div class='measurement-datum-heading', id='measurement-datum-time'>
   <p>Measured at</p>
 </div>
-<%= @measurement_data.each do |measurement_datum| %>
-  <div class='measurement-datum' id='measurement-datum<%= measurement_datum.id %>'>
+<% @measurement_data.each do |measurement_datum| %>
+  <div class='measurement-datum' id='measurement-datum-<%= measurement_datum.id %>'>
     <p>value</p>
     <p>time</p>
     <%= link_to "Edit", edit_measurement_datum_path(measurement_datum) %>

@@ -60,7 +60,7 @@ class MeasurementDataController < ApplicationController
   def destroy
     @measurement_datum.destroy
     respond_to do |format|
-      format.html { redirect_to measurement_data_url, notice: 'Measurement datum was successfully destroyed.' }
+      format.html { redirect_back(fallback_location: data_groups_path, notice: 'Measurement successfully deleted.') }
       format.json { head :no_content }
     end
   end
