@@ -78,7 +78,8 @@ class DataGroupsController < ApplicationController
       puts param
     end
 
-    saved_data = 'test'
+    notice = ''
+    saved_data = []
 
     params[:measurement].each do |measurement|
       if measurement[1] != ''
@@ -87,13 +88,16 @@ class DataGroupsController < ApplicationController
           if own_data_group
             measurement_datum = @data_group.measurement_data.create(value: measurement[1])
             if measurement_datum.save
-              
+              saved_data.push(@data_group.name + ': ' + measurement[1])
             end
           end 
         end
       end
     end
-    redirect_to input_path, notice: 'Data saved: ' + saved_data
+    if saved_data.size > 0
+      notice = 'Data saved: ' + saved_data.join(', ') 
+    end
+    redirect_to input_path,  notice: notice
   end
 
   private
