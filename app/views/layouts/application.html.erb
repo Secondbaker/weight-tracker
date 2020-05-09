@@ -7,9 +7,12 @@
 
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <link href="https://fonts.googleapis.com/css?family=Inter&display=swap" rel="stylesheet">
   </head>
 
-  <body>
-    <%= yield %>
+  <body class="bg-background">
+    <div class="container flex justify-center">
+      <%= yield %>
+    </div>      
   </body>
 </html>
