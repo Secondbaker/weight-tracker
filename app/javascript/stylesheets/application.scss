@@ -17,3 +17,18 @@
 .bg-carrot-orange {
     background-color: theme('themeColors.carrot-orange');
 }
+.important-text {
+    color: theme('themeColors.carrot-orange')
+}
+.main-text {
+    color: theme('themeColors.indigo-dye');
+}
+.light-text {
+    color: theme('themeColors.blue-munsell');
+}
+a {
+    color: theme('themeColors.blue-munsell');
+}
+a:hover {
+    color: theme('themeColors.android-green');
+}
