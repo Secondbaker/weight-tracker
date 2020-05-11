@@ -34,7 +34,7 @@ class DataGroupsController < ApplicationController
 
     respond_to do |format|
       if @data_group.save
-        format.html { redirect_to @data_group, notice: 'Data group was successfully created.' }
+        format.html { redirect_to input_path, notice: 'You can now input data for ' + @data_group.name + ' (' + @data_group.unit + ')' }
         format.json { render :show, status: :created, location: @data_group }
       else
         format.html { render :new }
@@ -68,7 +68,14 @@ class DataGroupsController < ApplicationController
   end
 
   def input
-    @data_groups = DataGroup.where(user_id: current_user.id)
+    @data_groups = DataGroup.where(user_id: current_user.id).includes(:measurement_data)
+    @has_data = false
+    @data_groups.each do |data_group|
+      @has_data = @has_data || data_group.measurement_data.any?
+    end
+    unless @data_groups.any?
+      redirect_to new_data_group_path
+    end
   end
 
   def save_input
@@ -115,7 +122,7 @@ class DataGroupsController < ApplicationController
 
     def own_data_group
       unless current_user.id == @data_group.user_id
-        redirect_to(root_path, notice: "You cannot access that data group") and return
+        redirect_to(root_path, notice: "You cannot access that data") and return
       end
       return true
     end

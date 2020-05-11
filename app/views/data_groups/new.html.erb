@@ -1,5 +1,9 @@
-<h1>New Data Group</h1>
+<div class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 mx-auto">
+    <h1 class="text-main">What do you want to track?</h1>
 
-<%= render 'form', data_group: @data_group %>
+    <%= render 'form', data_group: @data_group %>
 
-<%= link_to 'Back', data_groups_path %>
+    <% if current_user.data_groups.count > 1 %>
+        <%= link_to 'See charts', data_groups_path %>
+    <% end %>
+</div>
