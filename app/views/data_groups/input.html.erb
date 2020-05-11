@@ -15,7 +15,7 @@
         <%= form_tag '/save_input' do %>
             <div class="bg-white pt-6 pb-8 mb-4 mx-auto space-y-4">
                 <% @data_groups.each do |data_group| %>
-                    <div class="bg-white rounded px-8 pt-2 pb-4 shadow-md">
+                    <div class="bg-white px-8 pt-2 pb-4 shadow-md">
                         <%= fields_for :measurement do |measurement| %>
                             <div class="flex flex-cols content-center">
                                 <div>

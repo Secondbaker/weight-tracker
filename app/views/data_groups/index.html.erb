@@ -1,11 +1,10 @@
-<%= link_to "Sign Out", destroy_user_session_path(), method: :delete   %> 
-
-<p id="notice"><%= notice %></p>
-
+<div class="block bg-white rounded px-8 pt-6 pb-8 mb-4">
+<p id="notice", class="important-text text-xs"><%= notice %></p>
+<%= link_to "Sign Out", destroy_user_session_path(), method: :delete   %> |
 <%= link_to 'Back to input', input_path %>
-<div class="grid-cols-1">
+<div class="grid-cols-1 space-y-4">
 <% @data_groups.each do |data_group| %>
-  <div class='flex flex-col justify-center data-group green-accent border-current border-2 bg-white rounded p4' id='data-group-<%= data_group.id %>'>
+  <div class="bg-white px-8 pt-2 pb-4 shadow-md" id='data-group-<%= data_group.id %>'>
     <div>
     <%= line_chart data_group.measurement_data.pluck(:graph_time, :value), class: "w-full" %>
     </div>
@@ -16,3 +15,4 @@
 <% end %>
 
 <%= link_to 'New Data Group', new_data_group_path %>
+</div>
