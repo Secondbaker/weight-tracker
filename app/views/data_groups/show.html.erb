@@ -1,8 +1,9 @@
+<div class="block bg-white rounded px-8 pt-6 pb-8 mb-4">
 <p id="notice"><%= notice %></p>
 
 <%= link_to "Back to charts", data_groups_path %>
 
-<p><%= @data_group.name %></p>
+<p><%= @data_group.name %> <%= link_to 'Edit', edit_data_group_path(@data_group) %></p>
 <%= line_chart @measurement_data.pluck(:graph_time, :value) %>
 <div class='measurement-datum-heading', id='measurement-datum-value'>
   <p>Value</p>
@@ -11,13 +12,13 @@
   <p>Measured at</p>
 </div>
 <% @measurement_data.each do |measurement_datum| %>
-  <div class='measurement-datum' id='measurement-datum-<%= measurement_datum.id %>'>
+  <div class='measurement-datum flex-cols' id='measurement-datum-<%= measurement_datum.id %>'>
     <p><%= measurement_datum.value %></p>
     <p><%= measurement_datum.graph_time %></p>
-    <%= link_to "Edit", edit_measurement_datum_path(measurement_datum) %>
+    <%= link_to "Edit", edit_measurement_datum_path(measurement_datum) %> |
     <%= link_to "Delete", measurement_datum_path(measurement_datum), method: :delete %>
   </div>
 <% end %>
 
-<%= link_to 'Edit', edit_data_group_path(@data_group) %> |
-<%= link_to 'Back', data_groups_path %>
+
+</div>

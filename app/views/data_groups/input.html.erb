@@ -2,13 +2,13 @@
     <p id="notice", class="important-text text-xs"><%= notice %></p>
 
     <div>
-        <div>
-        <%= link_to "Sign Out", destroy_user_session_path(), method: :delete %> 
-        </div>
+        
+        <%= link_to "Sign Out", destroy_user_session_path(), method: :delete %> |
+        
         <% if @has_data %>
-            <div>
+            
             <%= link_to "See charts",  data_groups_path %>
-            </div>
+            
         <% end %>
     </div>
     <% if @data_groups.any? %>
