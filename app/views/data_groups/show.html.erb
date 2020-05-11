@@ -3,18 +3,15 @@
 
 <%= link_to "Back to charts", data_groups_path %>
 
-<p><%= @data_group.name %> <%= link_to 'Edit', edit_data_group_path(@data_group) %></p>
+<div class="bg-white px-8 pt-2 pb-4 shadow-md">
+<p><%= @data_group.name %> <%= link_to '(Edit)', edit_data_group_path(@data_group), class: "text-sm" %></p>
 <%= line_chart @measurement_data.pluck(:graph_time, :value) %>
-<div class='measurement-datum-heading', id='measurement-datum-value'>
-  <p>Value</p>
 </div>
-<div class='measurement-datum-heading', id='measurement-datum-time'>
-  <p>Measured at</p>
-</div>
+
 <% @measurement_data.each do |measurement_datum| %>
-  <div class='measurement-datum flex-cols' id='measurement-datum-<%= measurement_datum.id %>'>
-    <p><%= measurement_datum.value %></p>
-    <p><%= measurement_datum.graph_time %></p>
+  <div class='measurement-datum flex-cols px-8 pt-2 pb-4 shadow-md' id='measurement-datum-<%= measurement_datum.id %>'>
+    <p>Value: <%= measurement_datum.value %></p>
+    <p>Measured at: <%= measurement_datum.graph_time %></p>
     <%= link_to "Edit", edit_measurement_datum_path(measurement_datum) %> |
     <%= link_to "Delete", measurement_datum_path(measurement_datum), method: :delete %>
   </div>
