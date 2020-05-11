@@ -9,6 +9,7 @@
 START_TIME = Faker::Time.between(from: DateTime.now - 1, to: DateTime.now)
 START_WEIGHT = 180.0
 AVERAGE_WEIGHT_CHANGE_PER_DAY = -1.0 / 7.0
+AVERAGE_WEIGHT_PERCENTAGE_CHANGE = -1.0
 
 START_WEIGHT_SIZE = 40.0
 AVERAGE_WAIST_SIZE_CHANGE_PER_DAY = -1.0 / 300.0
@@ -53,7 +54,7 @@ until (time - START_TIME)  >= 60 * 60 * 24 * 365 do
     puts "Datum #" + datum_counter.to_s
     next_measurement = weight_group.measurement_data.create(value: display_weight, graph_time: time)
     next_time = Faker::Time.between(from: time, to: time + 24.hours)
-    base_weight = base_weight + ((next_time - time)*(AVERAGE_WEIGHT_CHANGE_PER_DAY / 24 /60 /60))
+    base_weight = base_weight + ((next_time - time)*(base_weight * AVERAGE_WEIGHT_PERCENTAGE_CHANGE / 7 / 24 /60 /60 / 100))
     display_weight = base_weight + rand(-4.0..4.0)
     time = next_time
     datum_counter += 1
