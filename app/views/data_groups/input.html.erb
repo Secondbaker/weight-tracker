@@ -1,14 +1,20 @@
-<div class="block overflow-scroll">
+<div class="block bg-white rounded">
     <p id="notice", class="important-text text-xs"><%= notice %></p>
 
-    <%= link_to "Sign Out", destroy_user_session_path(), method: :delete   %> 
-
+    <div>
+        <div>
+        <%= link_to "Sign Out", destroy_user_session_path(), method: :delete %> 
+        </div>
+        <div>
+        <%= link_to "See charts",  data_groups_path %>
+        </div>
+    </div>
     <%= form_tag '/save_input' do %>
-        <div class="green-accent border-current bg-white border-solid rounded border-2">
+        <div class="bg-white green-accent border-current border-solid rounded border-2">
         <% @data_groups.each do |data_group| %>
-            <div class="green-accent bg-white border-solid border-2 border-current px-8 pt-6 pb-8 mb-0 mx-auto">
+            <div class="bg-white rounded px-8 pt-6 pb-8">
                 <%= fields_for :measurement do |measurement| %>
-                    <div class="grid-cols-3 width">
+                    <div class="grid-cols-3 content-center">
                         <div>
                         <%= label_tag data_group.name, data_group.name, class: "main-text text-sm font-bold mb-2" %>
                         </div>
@@ -23,9 +29,7 @@
             </div>
         <% end %>
         </div>
-        <%= submit_tag "Save" %>
+        <%= submit_tag "Save", class: "bg-indigo-dye bg-android-green text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"%>
     <% end %>
-
-    <%= link_to "See charts",  data_groups_path %>
 </div>
 
