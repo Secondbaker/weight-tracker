@@ -6,17 +6,36 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
+verbose = true
 START_TIME = Faker::Time.between(from: DateTime.now - 1, to: DateTime.now)
+TRACKING_DAYS = 180
 START_WEIGHT = 180.0
 AVERAGE_WEIGHT_CHANGE_PER_DAY = -1.0 / 7.0
 AVERAGE_WEIGHT_PERCENTAGE_CHANGE = -1.0
 
-START_WEIGHT_SIZE = 40.0
+START_WAIST_SIZE = 40.0
 AVERAGE_WAIST_SIZE_CHANGE_PER_DAY = -1.0 / 300.0
 
 MeasurementDatum.destroy_all
 DataGroup.destroy_all
 User.destroy_all
+
+#creating users
+if verbose
+    puts 'Creating users'
+end
+20.times do |user_counter|
+    username = 'test'+ user_counter.to_s + '@test.com'
+    password = 'password'
+
+    puts "Creating user " + username
+    puts "With password " + password
+    user = User.new
+    user.email = username
+    user.password = password
+    user.password_confirmation = password
+    user.save!
+end
 
 #Creating User 1
 username = 'test1@test.com'
