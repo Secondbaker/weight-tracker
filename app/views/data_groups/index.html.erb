@@ -1,7 +1,7 @@
 <div class="block bg-white rounded px-8 pt-6 pb-8 mb-4">
 <p id="notice", class="important-text text-xs"><%= notice %></p>
 <%= link_to "Sign Out", destroy_user_session_path(), method: :delete   %> |
-<%= link_to 'Back to input', input_path %>
+<%= link_to 'Back to Input', input_path %>
 <div class="grid-cols-1 space-y-4">
 <% @data_groups.each do |data_group| %>
   <div class="bg-white px-8 pt-2 pb-4 shadow-md" id='data-group-<%= data_group.id %>'>
@@ -14,5 +14,5 @@
   </div>
 <% end %>
 
-<%= link_to 'New Data Group', new_data_group_path %>
+<%= link_to 'Create New Tracker', new_data_group_path %>
 </div>
