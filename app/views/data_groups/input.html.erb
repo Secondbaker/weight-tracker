@@ -1,19 +1,35 @@
-<p id="notice"><%= notice %></p>
+<div class="block bg-white rounded">
+    <p id="notice", class="important-text text-xs"><%= notice %></p>
 
-<%= link_to "Sign Out", destroy_user_session_path(), method: :delete   %> 
-
-<%= form_tag '/save_input' do %>
+    <div>
+        <div>
+        <%= link_to "Sign Out", destroy_user_session_path(), method: :delete %> 
+        </div>
+        <div>
+        <%= link_to "See charts",  data_groups_path %>
+        </div>
+    </div>
+    <%= form_tag '/save_input' do %>
+        <div class="bg-white green-accent border-current border-solid rounded border-2">
         <% @data_groups.each do |data_group| %>
-        <pre>
-            <%= fields_for :measurement do |measurement| %>
-                <%= label_tag data_group.name %>
-                <%= measurement.number_field data_group.id, step: :any %>
-                <%= label_tag data_group.unit %>
-            <% end %>
-        </pre>
+            <div class="bg-white rounded px-8 pt-6 pb-8">
+                <%= fields_for :measurement do |measurement| %>
+                    <div class="grid-cols-3 content-center">
+                        <div>
+                        <%= label_tag data_group.name, data_group.name, class: "main-text text-sm font-bold mb-2" %>
+                        </div>
+                        <div>
+                        <%= measurement.number_field data_group.id, step: :any, class: "shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" %>
+                        </div>
+                        <div>
+                        <%= label_tag data_group.unit, data_group.unit, class: "main-text text-sm font-bold mb-2" %>
+                        </div>
+                    </div>
+                <% end %>
+            </div>
+        <% end %>
+        </div>
+        <%= submit_tag "Save", class: "bg-indigo-dye bg-android-green text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"%>
     <% end %>
-    <%= submit_tag "Save" %>
-<% end %>
-
-<%= link_to "See charts",  data_groups_path %>
+</div>
 

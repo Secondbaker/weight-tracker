@@ -40,6 +40,7 @@ second_user.password_confirmation = password
 second_user.save!
 
 #Creating Weight Data
+5.times do
 puts "Creating Weight Group"
 weight_group = first_user.data_groups.create(name: "Weight", unit: Measurement::Unit[:pounds])
 
@@ -56,6 +57,7 @@ until (time - START_TIME)  >= 60 * 60 * 24 * 365 do
     display_weight = base_weight + rand(-4.0..4.0)
     time = next_time
     datum_counter += 1
+end
 end
 
 #Creating Waist Size Data

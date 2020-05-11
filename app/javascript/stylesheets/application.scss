@@ -1,0 +1,37 @@
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+.bg-background {
+    background-color: theme('themeColors.background');
+}
+.bg-android-green:hover {
+    background-color: theme('themeColors.android-green');
+}
+.bg-blue-munsell {
+    background-color: theme('themeColors.blue-munsell');
+}
+.bg-indigo-dye {
+    background-color: theme('themeColors.indigo-dye');
+}
+.bg-carrot-orange {
+    background-color: theme('themeColors.carrot-orange');
+}
+.important-text {
+    color: theme('themeColors.carrot-orange')
+}
+.main-text {
+    color: theme('themeColors.indigo-dye');
+}
+.light-text {
+    color: theme('themeColors.blue-munsell');
+}
+a {
+    color: theme('themeColors.blue-munsell');
+}
+a:hover {
+    color: theme('themeColors.android-green');
+}
+.green-accent {
+    color: theme('themeColors.android-green');
+}
