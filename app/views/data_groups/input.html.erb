@@ -19,13 +19,13 @@
                         <%= fields_for :measurement do |measurement| %>
                             <div class="flex flex-cols content-center">
                                 <div>
-                                <%= label_tag data_group.name, data_group.name + ':', class: "main-text text-sm font-bold m-2" %>
+                                <%= label_tag data_group.name, data_group.name + ':', class: "form-label" %>
                                 </div>
                                 <div>
                                 <%= measurement.number_field data_group.id, step: :any, class: "shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" %>
                                 </div>
                                 <div>
-                                <%= label_tag data_group.unit, data_group.unit, class: "main-text text-sm font-bold m-2" %>
+                                <%= label_tag data_group.unit, data_group.unit, class: "form-label" %>
                                 </div>
                             </div>
                         <% end %>

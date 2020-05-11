@@ -1,6 +1,7 @@
 @import "tailwindcss/base";
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
+@import "tailwindcss/screens";
 
 .bg-background {
     background-color: theme('themeColors.background');
@@ -34,4 +35,14 @@ a:hover {
 }
 .green-accent {
     color: theme('themeColors.android-green');
+}
+.form-label {
+    @apply main-text;
+    @apply text-5xl;
+    @apply m-2;
+}
+@screen xl {
+    .form-label {
+        @apply text-xl font-bold;
+    }
 }

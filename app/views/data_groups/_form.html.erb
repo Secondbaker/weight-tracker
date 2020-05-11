@@ -12,12 +12,12 @@
   <% end %>
 
   <div class="field">
-    <%= form.label :name, class: "main-text text-sm font-bold mb-2"%>
+    <%= form.label :name, class: "form-label"%>
     <%= form.text_field :name, class: "shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" %>
   </div>
 
   <div class="field">
-    <%= form.label :unit, class: "main-text text-sm font-bold mb-2" %>
+    <%= form.label :unit, class: "form-label" %>
     <%= form.select :unit, options_for_select(Measurement::Unit.names), {}, { class: "shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" } %>
   </div>
 

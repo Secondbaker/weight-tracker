@@ -12,13 +12,13 @@
   <% end %>
 
   <div class="field">
-    <%= form.label :value, class: "main-text text-sm font-bold mb-2" %>
+    <%= form.label :value, class: "form-label" %>
     <%= form.text_field :value, class: "shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" %>
   </div>
 
   <% if form.object.graph_time %>
     <div class="field">
-      <%= form.label :graph_time, class: "main-text text-sm font-bold mb-2" %>
+      <%= form.label :graph_time, class: "form-label" %>
       <%= form.datetime_select :graph_time, {}, html_options={ class: "shadow border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" } %>
     </div>
   <% end %>
