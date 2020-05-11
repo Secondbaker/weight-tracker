@@ -13,17 +13,17 @@
 
   <div class="field">
     <%= form.label :value, class: "form-label" %>
-    <%= form.text_field :value, class: "shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" %>
+    <%= form.text_field :value, class: "form-input" %>
   </div>
 
   <% if form.object.graph_time %>
     <div class="field">
       <%= form.label :graph_time, class: "form-label" %>
-      <%= form.datetime_select :graph_time, {}, html_options={ class: "shadow border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" } %>
+      <%= form.datetime_select :graph_time, {}, html_options={ class: "form-input" } %>
     </div>
   <% end %>
 
   <div class="actions">
-    <%= form.submit "Update", class: "bg-indigo-dye bg-android-green text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" %>
+    <%= form.submit "Update", class: "important-button" %>
   </div>
 <% end %>
