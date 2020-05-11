@@ -3,11 +3,11 @@
 
     <div>
         
-        <%= link_to "Sign Out", destroy_user_session_path(), method: :delete %> |
+        <%= link_to "Sign Out", destroy_user_session_path(), method: :delete %>
         
         <% if @has_data %>
             
-            <%= link_to "See charts",  data_groups_path %>
+           | <%= link_to "See charts",  data_groups_path %>
             
         <% end %>
     </div>

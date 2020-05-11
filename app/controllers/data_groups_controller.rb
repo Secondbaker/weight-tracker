@@ -13,7 +13,7 @@ class DataGroupsController < ApplicationController
   # GET /data_groups/1.json
   def show
     unless current_user.id == @data_group.user_id
-      redirect_to(root_path, notice: "You cannot access that data group") and return
+      redirect_to(root_path, notice: "You cannot access that data") and return
     end
     @measurement_data = MeasurementDatum.where(data_group_id: params[:id]).order(:graph_time)
   end
@@ -48,7 +48,7 @@ class DataGroupsController < ApplicationController
   def update
     respond_to do |format|
       if @data_group.update(data_group_params)
-        format.html { redirect_to @data_group, notice: 'Data group was successfully updated.' }
+        format.html { redirect_to @data_group, notice: @data_group.name + ' (' + @data_group.unit+ ') was successfully updated' }
         format.json { render :show, status: :ok, location: @data_group }
       else
         format.html { render :edit }
