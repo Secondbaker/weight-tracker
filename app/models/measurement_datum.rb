@@ -1,4 +1,5 @@
 class MeasurementDatum < ApplicationRecord
+    include Comparable
     before_save :set_initial_graph_time
 
     belongs_to :data_group
@@ -15,5 +16,9 @@ class MeasurementDatum < ApplicationRecord
             self.graph_time = self.created_at
         end
         self.save
+    end
+
+    def <=>(other)
+        self.value <=> other.value
     end
 end
