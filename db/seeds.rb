@@ -6,6 +6,7 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 verbose = true
+production = true
 START_TIME = Faker::Time.between(from: DateTime.now - 1, to: DateTime.now)
 START_WEIGHT = 180.0
 CALORIES_PER_POUND = 3500
@@ -19,6 +20,7 @@ MeasurementDatum.destroy_all
 DataGroup.destroy_all
 User.destroy_all
 
+unless production
 puts 'Starting at ' + seed_start.to_s
 #creating users
 rand(6..12).times do |user_counter|
@@ -77,3 +79,4 @@ rand(6..12).times do |user_counter|
 end
 
 puts 'Completed in ' + (Time.now - seed_start).to_s + ' seconds'
+end
