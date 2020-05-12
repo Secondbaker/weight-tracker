@@ -6,8 +6,9 @@
 <% @data_groups.each do |data_group| %>
   <div class="bg-white px-8 pt-2 pb-4 shadow-md" id='data-group-<%= data_group.id %>'>
     <div>
-    <%= line_chart data_group.measurement_data.pluck(:graph_time, :value), class: "w-full" %>
+    <%= line_chart data_group.measurement_data.pluck(:graph_time, :value), min: data_group.graph_min, max: data_group.graph_max, class: "w-full" %>
     </div>
+
     <div>
     <%= link_to data_group.name, data_group_path(data_group), class: "text-md text-primary text-center w-1/3"%>
     </div>
