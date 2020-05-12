@@ -7,15 +7,30 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 verbose = true
 START_TIME = Faker::Time.between(from: DateTime.now - 1, to: DateTime.now)
-TRACKING_DAYS = 180
 START_WEIGHT = 180.0
 CALORIES_PER_POUND = 3500
 AVERAGE_WEIGHT_CHANGE_PER_DAY = -1.0 / 7.0
 AVERAGE_WEIGHT_PERCENTAGE_CHANGE = -1.0
+SIX_MONTHS = 60 * 60 * 24 * 182
+START_WAIST_SIZE = 40.0
+AVERAGE_WAIST_SIZE_CHANGE_PER_DAY = -1.0 / 300.0
 seed_start = Time.now
+MeasurementDatum.destroy_all
 DataGroup.destroy_all
 User.destroy_all
 
+puts 'Starting at ' + seed_start.to_s
+#creating users
+rand(6..12).times do |user_counter|
+    start_weight = 180.0 + rand(-30..30)
+    username = 'test' + user_counter.to_s + '@test.com'
+    password = 'password'
+    if verbose
+        puts "Creating user " + username
+    end
+    if verbose
+        puts "With password " + password
+    end
     user = User.new
     user.email = username
     user.password = password
