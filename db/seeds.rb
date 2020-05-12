@@ -5,96 +5,75 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-
+verbose = true
 START_TIME = Faker::Time.between(from: DateTime.now - 1, to: DateTime.now)
 START_WEIGHT = 180.0
+CALORIES_PER_POUND = 3500
 AVERAGE_WEIGHT_CHANGE_PER_DAY = -1.0 / 7.0
 AVERAGE_WEIGHT_PERCENTAGE_CHANGE = -1.0
-
-START_WEIGHT_SIZE = 40.0
+SIX_MONTHS = 60 * 60 * 24 * 182
+START_WAIST_SIZE = 40.0
 AVERAGE_WAIST_SIZE_CHANGE_PER_DAY = -1.0 / 300.0
-
+seed_start = Time.now
 MeasurementDatum.destroy_all
 DataGroup.destroy_all
 User.destroy_all
 
-#Creating User 1
-username = 'test1@test.com'
-password = 'password'
-puts "Creating user " + username
-puts "With password " + password
-first_user = User.new
-first_user.email = username
-first_user.password = password
-first_user.password_confirmation = password
-first_user.save!
+puts 'Starting at ' + seed_start.to_s
+#creating users
+rand(6..12).times do |user_counter|
+    start_weight = 180.0 + rand(-30..30)
+    username = 'test' + user_counter.to_s + '@test.com'
+    password = 'password'
+    if verbose
+        puts "Creating user " + username
+    end
+    if verbose
+        puts "With password " + password
+    end
+    user = User.new
+    user.email = username
+    user.password = password
+    user.password_confirmation = password
+    user.save!
 
-#Creating User 2
-username = 'test2@test.com'
-password = 'password'
-puts "Creating user " + username
-puts "With password " + password
-second_user = User.new
-second_user.email = username
-second_user.password = password
-second_user.password_confirmation = password
-second_user.save!
+    #Creating Weight Data
+    if verbose
+        puts "Creating Weight Group"
+    end
+    weight_group = user.data_groups.create(name: "Weight", unit: Measurement::Unit[:pounds])
 
-#Creating Weight Data
-5.times do
-puts "Creating Weight Group"
-weight_group = first_user.data_groups.create(name: "Weight", unit: Measurement::Unit[:pounds])
+    if verbose
+        puts "Creating Waist Circumference Group"
+    end
+    waist_circumference_group = user.data_groups.create(name: "Waist Circumference", unit: Measurement::Unit[:inches])
 
-base_weight = START_WEIGHT
-display_weight = base_weight
-time = START_TIME
-datum_counter = 1
-puts "Creating Data"
-until (time - START_TIME)  >= 60 * 60 * 24 * 365 do
-    puts "Datum #" + datum_counter.to_s
-    next_measurement = weight_group.measurement_data.create(value: display_weight, graph_time: time)
-    next_time = Faker::Time.between(from: time, to: time + 24.hours)
-    base_weight = base_weight + ((next_time - time)*(base_weight * AVERAGE_WEIGHT_PERCENTAGE_CHANGE / 7 / 24 /60 /60 / 100))
-    display_weight = base_weight + rand(-4.0..4.0)
-    time = next_time
-    datum_counter += 1
-end
-end
+    base_weight = start_weight
+    display_weight = base_weight
+    base_waist_size = START_WAIST_SIZE
+    display_waist_size = base_waist_size
+    time = START_TIME
+    
+    if verbose
+        puts "Creating weight data"
+    end
+    datum_counter = 1
+    until (time - START_TIME)  >= SIX_MONTHS do
+        if verbose 
+            puts "Weight Datum #" + datum_counter.to_s
+        end
+        next_measurement = weight_group.measurement_data.create(value: display_weight, graph_time: time)
+        next_measurement = waist_circumference_group.measurement_data.create(value: display_waist_size, graph_time: time)
+        next_time = Faker::Time.between(from: time, to: time + 24.hours)
+        base_weight = base_weight + ((next_time - time)*(base_weight * AVERAGE_WEIGHT_PERCENTAGE_CHANGE / 7 / 24 /60 /60 / 100))
+        display_weight = base_weight + rand(-4.0..4.0)
+        base_waist_size = base_weight * START_WAIST_SIZE / START_WEIGHT
+        display_waist_size = base_waist_size + rand(-0.25..0.25)
+        time = next_time
+        datum_counter +=1
+    end
 
-#Creating Waist Size Data
-puts "Creating Waist Size Group"
-waist_size_group = first_user.data_groups.create(name: "Waist Size", unit: Measurement::Unit[:inches])
-
-base_waist_size = START_WEIGHT_SIZE
-display_waist_size = base_waist_size
-time = START_TIME
-datum_counter = 1
-puts "Creating Data"
-until (time - START_TIME)  >= 60 * 60 * 24 * 365 do
-    puts "Datum #" + datum_counter.to_s
-    next_measurement = waist_size_group.measurement_data.create(value: display_waist_size, graph_time: time)
-    next_time = Faker::Time.between(from: time, to: time + 24.hours)
-    base_waist_size = base_waist_size + ((next_time - time)*(AVERAGE_WAIST_SIZE_CHANGE_PER_DAY / 24 /60 /60))
-    display_waist_size = base_waist_size + rand(-0.5..0.5)
-    time = next_time
-    datum_counter += 1
+    
 end
 
-#Creating Weight Data
-puts "Creating Weight Group"
-weight_group = second_user.data_groups.create(name: "Weight", unit: Measurement::Unit[:pounds])
-
-base_weight = START_WEIGHT
-display_weight = base_weight
-time = START_TIME
-datum_counter = 1
-puts "Creating Data"
-until (time - START_TIME)  >= 60 * 60 * 24 * 365 do
-    puts "Datum #" + datum_counter.to_s
-    next_measurement = weight_group.measurement_data.create(value: display_weight, graph_time: time)
-    next_time = Faker::Time.between(from: time, to: time + 24.hours)
-    base_weight = base_weight + ((next_time - time)*(AVERAGE_WEIGHT_CHANGE_PER_DAY / 24 /60 /60))
-    display_weight = base_weight + rand(-4.0..4.0)
-    time = next_time
-    datum_counter += 1
-end
+puts 'Completed in ' + (Time.now - seed_start).to_s + ' seconds'
