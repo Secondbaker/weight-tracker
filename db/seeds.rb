@@ -50,7 +50,7 @@ rand(6..12).times do |user_counter|
 
     base_weight = start_weight
     display_weight = base_weight
-    base_waist_size = START_WAIST_SIZE
+    base_waist_size = start_weight * START_WAIST_SIZE / START_WEIGHT
     display_waist_size = base_waist_size
     time = START_TIME
     
