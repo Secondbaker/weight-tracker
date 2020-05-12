@@ -8,7 +8,6 @@
     <div>
     <%= line_chart [{name: data_group.name, data:data_group.measurement_data.pluck(:graph_time, :value)}, {name: 'Averages', data: data_group.rolling_average(time_limit:7).pluck(:graph_time, :value)}], min: data_group.graph_min, max: data_group.graph_max, class: "w-full" %>
     </div>
-    <%= data_group.rolling_average(time_limit:7).inspect %>
     <div>
     <%= link_to data_group.name, data_group_path(data_group), class: "text-md text-primary text-center w-1/3"%>
     </div>

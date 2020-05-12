@@ -17,7 +17,8 @@ class DataGroup < ApplicationRecord
     end
     def rolling_average(time_limit:integer)
         averages = []
-        measurement_data.each do |measurement_datum|
+        measurements = measurement_data.order(:graph_time)
+        measurements.each do |measurement_datum|
             averages.push({value: measurement_datum.value, graph_time: measurement_datum.graph_time})
         end
         return averages
