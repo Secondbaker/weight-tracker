@@ -15,4 +15,11 @@ class DataGroup < ApplicationRecord
     def graph_max
         (self.highest.value + (self.highest.value - self.lowest.value) * 0.05).ceil
     end
+    def rolling_average(time_limit:integer)
+        averages = []
+        measurement_data.each do |measurement_datum|
+            averages.push({value: measurement_datum.value, graph_time: measurement_datum.graph_time})
+        end
+        return averages
+    end
 end
