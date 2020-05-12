@@ -1,0 +1,1 @@
+<%= line_chart [{name: 'Average', data: data_group.rolling_average(time_limit:7).pluck(:graph_time, :value), points: false, library: {borderWidth: 4}}, {name: data_group.name, data:data_group.measurement_data.pluck(:graph_time, :value)}], colors: ["#99c24d", "#2e4057"], min: data_group.graph_min, max: data_group.graph_max, defer: false, class: "w-full" %>

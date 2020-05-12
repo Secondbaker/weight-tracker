@@ -5,7 +5,7 @@
 
 <div class="bg-white px-8 pt-2 pb-4 shadow-md">
 <p><%= @data_group.name %> <%= link_to '(Edit)', edit_data_group_path(@data_group), class: "text-sm" %></p>
-<%= line_chart @measurement_data.pluck(:graph_time, :value) %>
+<%= render partial: 'data_groups/chart', locals: { data_group: @data_group } %>
 </div>
 
 <% @measurement_data.each do |measurement_datum| %>
