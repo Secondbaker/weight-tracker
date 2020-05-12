@@ -19,7 +19,7 @@
   <% if form.object.graph_time %>
     <div class="field">
       <%= form.label :graph_time, class: "form-label" %>
-      <%= form.datetime_select :graph_time, {}, html_options={ class: "form-input" } %>
+      <%= form.datetime_select :graph_time, { include_seconds: true }, html_options={ class: "form-input" } %>
     </div>
   <% end %>
 
