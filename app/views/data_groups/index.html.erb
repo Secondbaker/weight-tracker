@@ -7,7 +7,11 @@
   <div class="bg-white px-8 pt-2 pb-4 shadow-md" id='data-group-<%= data_group.id %>'>
     <div>
 
-    <%= render partial: 'data_groups/chart', locals: { data_group: data_group } %>
+      <% if data_group.measurement_data.any?%>
+        <%= render partial: 'data_groups/chart', locals: { data_group: data_group } %>
+      <% else %>
+        <p class="text-lg font-bold important-text">No data yet</p>
+      <% end %>
     </div>
     <div>
     <%= link_to data_group.name, data_group_path(data_group), class: "text-md text-primary text-center w-1/3"%>
